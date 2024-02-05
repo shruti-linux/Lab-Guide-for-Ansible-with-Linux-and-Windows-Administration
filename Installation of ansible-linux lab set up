@@ -1,0 +1,71 @@
+INSTALLATION OF ANSIBLE IN LAB ENVIRNOMENT
+Lab Overview:
+
+Lab Details
+
+•	This lab walks you through the steps to understand and configure to set your environment for ansible.
+•	You will practice using the terminal.
+
+Introduction
+
+Ansible is an open-source automation tool that simplifies complex IT tasks, making them more efficient and scalable. 
+It falls under the category of configuration management and orchestration tools, designed to automate various aspects of IT infrastructure management, 
+deployment, and application provisioning.
+
+
+Step-by-Step Instructions:
+
+ 	Step1: Install  the Package
+
+	On master node
+•	yum  install epel-release   --- as root user
+•	yum install ansible -y
+
+ 	Step2: Entry of all the Managed Host in host file
+
+	On master node,worker1 and worker2 node 
+
+•	vim /etc/hosts
+            172.25.100.143   master
+            172.25.100.144   worker1
+            172.25.100.145   worker2
+
+Cross-Verify 
+            Run these commands from master node 
+•	ping -c3 worker1 
+•	ping -c3 worker2 
+
+ 	Step3: Add  the user of your choice in the system with same name in master worker1 and worker2
+
+	On master node,worker1 and worker2 node 
+•	useradd  newuser                         
+•	passwd newuser
+
+ 	Step4: Assigning the added user the sudoers privilege
+
+	on master node worker1 and worker2 node 
+•	vim /etc/sudoers
+
+         Copying the suoders file in managed hosts
+•	scp -r /etc/sudoers worker1: /etc/sudoers
+•	scp -r /etc/sudoers worker2: /etc/suoders
+
+Cross-verify the entries is made in sudoers file 
+
+Password less authentication via ssh
+
+	In master node:
+•	ssh-keygen
+•	ssh-copy-id newuser@worker1
+•	ssh-copy-id newuser@worker2
+
+
+Cross- verify the entries
+•	ls- la 
+•	cd .ssh
+•	cat  .ssh/authorization_ key
+
+
+End Lab
+      You have successfully completed the lab.
+
